@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConsoleView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pa04</a> &gt; <a href="index.source.html" class="el_package">cs3500.pa03.view</a> &gt; <span class="el_source">ConsoleView.java</span></div><h1>ConsoleView.java</h1><pre class="source lang-java linenums">package cs3500.pa03.view;
+
+import cs3500.pa03.model.Coord;
+import cs3500.pa03.model.enumerations.GameResult;
+
+/**
+ * The responsibility of this class is to display the view
+ * to the Console. Implementing ViewInterface.
+ */
+<span class="fc" id="L10">public class ConsoleView implements ViewInterface {</span>
+
+  /**
+   * Displays the given Board - Coord[][].
+   *
+   * @param board   Coord[][] to display
+   */
+  @Override
+  public void displayBoard(Coord[][] board) {
+<span class="fc bfc" id="L19" title="All 2 branches covered.">    for (int r = 0; r &lt; board[0].length; r++) {</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">      for (int c = 0; c &lt; board.length; c++) {</span>
+<span class="fc bfc" id="L21" title="All 4 branches covered.">        if (r == 0 &amp;&amp; c == 0) {</span>
+<span class="fc" id="L22">          System.out.print(&quot;┌─────┬&quot;);</span>
+<span class="fc bfc" id="L23" title="All 4 branches covered.">        } else if (r == 0 &amp;&amp; c == board.length - 1) {</span>
+<span class="fc" id="L24">          System.out.print(&quot;─────┐&quot;);</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        } else if (r == 0) {</span>
+<span class="fc" id="L26">          System.out.print(&quot;─────┬&quot;);</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        } else if (c == board.length - 1) {</span>
+<span class="fc" id="L28">          System.out.print(&quot;─────┤&quot;);</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        } else if (c == 0) {</span>
+<span class="fc" id="L30">          System.out.print(&quot;├─────┼&quot;);</span>
+        } else {
+<span class="fc" id="L32">          System.out.print(&quot;─────┼&quot;);</span>
+        }
+      }
+<span class="fc" id="L35">      System.out.print(&quot;\n&quot;);</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">      for (int c = 0; c &lt; board.length; c++) {</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (c == 0) {</span>
+<span class="fc" id="L38">          System.out.print(&quot;│&quot;);</span>
+        }
+<span class="fc" id="L40">        displayCoord(board[c][r]);</span>
+      }
+<span class="fc" id="L42">      System.out.print(&quot;\n&quot;);</span>
+    }
+<span class="fc bfc" id="L44" title="All 2 branches covered.">    for (int c = 0; c &lt; board.length; c++) {</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">      if (c == 0) {</span>
+<span class="fc" id="L46">        System.out.print(&quot;└─────┴&quot;);</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">      } else if (c == board.length - 1) {</span>
+<span class="fc" id="L48">        System.out.print(&quot;─────┘\n&quot;);</span>
+      } else {
+<span class="fc" id="L50">        System.out.print(&quot;─────┴&quot;);</span>
+      }
+    }
+<span class="fc" id="L53">  }</span>
+
+  /**
+   * Displays a given Coord
+   *
+   * @param c   Coord to display
+   */
+  @Override
+  public void displayCoord(Coord c) {
+<span class="pc bpc" id="L62" title="1 of 6 branches missed.">    switch (c.getType()) {</span>
+      case HIT:
+<span class="fc" id="L64">        System.out.print(&quot;  ╳  │&quot;);</span>
+<span class="fc" id="L65">        break;</span>
+      case MISS:
+<span class="fc" id="L67">        System.out.print(&quot;  ◌  │&quot;);</span>
+<span class="fc" id="L68">        break;</span>
+      case EMPTY:
+<span class="fc" id="L70">        System.out.print(&quot;     │&quot;);</span>
+<span class="fc" id="L71">        break;</span>
+      case SHIP:
+<span class="fc" id="L73">        System.out.print(&quot; ▐█▌ │&quot;);</span>
+<span class="fc" id="L74">        break;</span>
+      case SHIPHIT:
+<span class="fc" id="L76">        System.out.print(&quot; ▐╳▌ │&quot;);</span>
+<span class="fc" id="L77">        break;</span>
+      default: break;
+    }
+<span class="fc" id="L80">  }</span>
+
+  /**
+   *  Displays the welcome message.
+   */
+  @Override
+  public void welcome() {
+<span class="fc" id="L87">    System.out.println(&quot;\n&quot;</span>
+        + &quot;████████████████████████████████████████████████████████████████████\n&quot;
+        + &quot;█▄ ▄ ▀██▀  ██ ▄ ▄ █ ▄ ▄ █▄ ▄███▄ ▄▄ ███ ▄▄▄▄██▀  ██▄ ▄███▄ █ ▄█ ▄▄ █\n&quot;
+        + &quot;██ ▄ ▀██ ▀ ████ █████ ████ ██▀██ ▄█▀███▄▄▄▄ ██ ▀ ███ ██▀██▄ ▄██ ██ █\n&quot;
+        + &quot;█▄▄▄▄██▄▄█▄▄██▄▄▄███▄▄▄██▄▄▄▄▄█▄▄▄▄▄███▄▄▄▄▄█▄▄█▄▄█▄▄▄▄▄███▄███▄▄▄▄█&quot;);
+<span class="fc" id="L92">    System.out.println(&quot;Directions: Destroy the computer in OOD Battleship.\n&quot;);</span>
+<span class="fc" id="L93">    System.out.println(&quot;Legend:\n&quot;</span>
+        + &quot; ╳  = You Hit an Enemy Ship\n&quot;
+        + &quot; ◌  = Miss\n&quot;
+        + &quot;▐█▌ = Your Ship\n&quot;
+        + &quot;▐╳▌ = The Enemy Hit Your Ship\n&quot;
+        + &quot;    = Empty\n&quot;);
+<span class="fc" id="L99">  }</span>
+
+  /**
+   *  Prompts the user for the board size
+   */
+  @Override
+  public void promptBoardSize() {
+<span class="fc" id="L106">    System.out.println(&quot;Please enter dimensions you wish the board to be below [width height].&quot;);</span>
+<span class="fc" id="L107">    System.out.print(&quot;Board Size: &quot;);</span>
+<span class="fc" id="L108">  }</span>
+
+  /**
+   * When an invalid board size is given, this message is prompted.
+   *
+   * @param min   int minimum board size
+   * @param max   int maximum board size
+   */
+  @Override
+  public void invalidBoardSize(int min, int max) {
+<span class="fc" id="L118">    System.out.println(&quot;I'm sorry, those are invalid dimensions. Both must be between &quot;</span>
+        + min + &quot; and &quot; + max + &quot;. Please retry below.&quot;);
+<span class="fc" id="L120">    System.out.print(&quot;Board Size: &quot;);</span>
+<span class="fc" id="L121">  }</span>
+
+  /**
+   *  Prompts the user to enter a fleet of ships
+   *
+   * @param max int ships to add
+   */
+  @Override
+  public void promptShips(int max) {
+<span class="fc" id="L130">    System.out.println(&quot;Please enter the number of each type of ship in the order \n&quot;</span>
+        + &quot;[Carrier Battleship Destroyer Submarine]. Your fleet size total must \n&quot;
+        + &quot;not exceed &quot; + max + &quot;.&quot;);
+<span class="fc" id="L133">    System.out.print(&quot;Fleet: &quot;);</span>
+<span class="fc" id="L134">  }</span>
+
+  /**
+   * When an invalid fleet is given, the message is prompted
+   *
+   * @param max   int max number of ships allowed
+   */
+  @Override
+  public void invalidShips(int max) {
+<span class="fc" id="L143">    System.out.println(&quot;Your fleet size total must not exceed &quot; + max + &quot;. You must have at\n&quot;</span>
+        + &quot;least 1 of every type. Try again.&quot;);
+<span class="fc" id="L145">    System.out.print(&quot;Fleet: &quot;);</span>
+<span class="fc" id="L146">  }</span>
+
+  /**
+   *  Prompts the user for coordinates to attack
+   *
+   * @param num   number of shots to take
+   */
+  @Override
+  public void promptCoords(int num) {
+<span class="fc" id="L155">    System.out.println(&quot;Please enter &quot; + num + &quot; coordinates to attack:&quot;);</span>
+<span class="fc" id="L156">  }</span>
+
+  /**
+   *  When given invalid coords, this message is prompted
+   */
+  @Override
+  public void invalidCoords() {
+<span class="fc" id="L163">    System.out.println(&quot;I'm sorry. You have entered an invalid set of coordinates.\n&quot;</span>
+        + &quot;Please try again:&quot;);
+<span class="fc" id="L165">  }</span>
+
+  /**
+   *  Displays a game over screen with the result
+   *
+   * @param result  GameResult to display
+   * @param reason  Reason for game ending as a String
+   */
+  @Override
+  public void gameOver(GameResult result, String reason) {
+<span class="fc" id="L175">    System.out.println(&quot;The game resulted in a &quot; + GameResult.toString(result));</span>
+<span class="fc" id="L176">    System.out.println(reason);</span>
+<span class="fc" id="L177">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

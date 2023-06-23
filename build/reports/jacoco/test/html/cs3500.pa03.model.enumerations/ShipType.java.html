@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ShipType.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pa04</a> &gt; <a href="index.source.html" class="el_package">cs3500.pa03.model.enumerations</a> &gt; <span class="el_source">ShipType.java</span></div><h1>ShipType.java</h1><pre class="source lang-java linenums">package cs3500.pa03.model.enumerations;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * Enumeration Type to represent the types that a ship can be.
+ */
+<span class="fc" id="L10">public enum ShipType {</span>
+
+  /**
+   * Carrier, 6 length
+   */
+<span class="fc" id="L15">  CARRIER(6),</span>
+
+  /**
+   * Battleship, 5 length
+   */
+<span class="fc" id="L20">  BATTLESHIP(5),</span>
+
+  /**
+   * Destroyer, 4 length
+   */
+<span class="fc" id="L25">  DESTROYER(4),</span>
+
+  /**
+   * Submarine, 3 length
+   */
+<span class="fc" id="L30">  SUBMARINE(3);</span>
+
+  private int size;
+
+  /**
+   * Returns the size of this type of ship.
+   *
+   * @return int size of this ship type
+   */
+  public int getSize() {
+<span class="fc" id="L40">    return size;</span>
+  }
+
+  /**
+   * Returns a List of ShipTypes of all the types that exist
+   *
+   * @return  List of ShipTypes
+   */
+  public static List&lt;ShipType&gt; asList() {
+<span class="fc" id="L49">    return new ArrayList&lt;&gt;(Arrays.asList(</span>
+        ShipType.CARRIER,
+        ShipType.BATTLESHIP,
+        ShipType.DESTROYER,
+        ShipType.SUBMARINE));
+  }
+
+  /**
+   * Private constructor for a ShipType
+   *
+   * @param n   size of the ShipType
+   */
+<span class="fc" id="L61">  private ShipType(int n) {</span>
+<span class="fc" id="L62">    this.size = n;</span>
+<span class="fc" id="L63">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

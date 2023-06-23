@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlayerUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pa04</a> &gt; <a href="index.source.html" class="el_package">cs3500.pa03.model</a> &gt; <span class="el_source">PlayerUtils.java</span></div><h1>PlayerUtils.java</h1><pre class="source lang-java linenums">package cs3500.pa03.model;
+
+import cs3500.pa03.model.enumerations.CoordType;
+import cs3500.pa03.model.enumerations.ShipType;
+import cs3500.pa03.singleton.Randomizer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+/**
+ * This class implements any methods
+ * that are the same between the computer
+ * and the user type players.
+ */
+<span class="fc" id="L17">public class PlayerUtils {</span>
+
+  /**
+   * Generic setup method between the two Player Classes
+   *
+   * @param specifications   HashMap Specifications for the fleet
+   * @param myBoard          Coord[][] representing the player's board
+   * @return                 List of Ships representing their fleet on the given board
+   */
+  public static List&lt;Ship&gt; setup(Map&lt;ShipType, Integer&gt; specifications, Coord[][] myBoard) {
+<span class="fc" id="L27">    List&lt;Ship&gt; ships = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L28">    initializeBoard(myBoard);</span>
+<span class="fc" id="L29">    List&lt;ShipType&gt; types = ShipType.asList();</span>
+
+<span class="fc bfc" id="L31" title="All 2 branches covered.">    for (ShipType t : types) {</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">      for (int i = 0; i &lt; specifications.get(t); i++) {</span>
+<span class="fc" id="L33">        ships.add(new Ship(tryPlacement(t.getSize(), myBoard), t));</span>
+      }
+<span class="fc" id="L35">    }</span>
+
+<span class="fc" id="L37">    return ships;</span>
+  }
+
+  /**
+   * Attempts to place this ship on the board.
+   *
+   * @return    List of Coords representing the ship's successful placement on the board
+   */
+  private static List&lt;Coord&gt; tryPlacement(int length, Coord[][] board) {
+<span class="fc" id="L46">    int maxX = board.length - 1;</span>
+<span class="fc" id="L47">    int maxY = board[maxX].length - 1;</span>
+<span class="fc" id="L48">    Random r = Randomizer.getRandomizer().getRandom();</span>
+
+<span class="fc" id="L50">    List&lt;Coord&gt; placement = new ArrayList&lt;&gt;(Arrays.asList(new Coord(-1, -1)));</span>
+
+<span class="fc bfc" id="L52" title="All 2 branches covered.">    while (!validPlacement(placement, board)) {</span>
+<span class="fc" id="L53">      placement = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L54">      int initialX = r.nextInt(maxX + 1);</span>
+<span class="fc" id="L55">      int initialY = r.nextInt(maxY + 1);</span>
+<span class="fc" id="L56">      int orientation = r.nextInt(2);</span>
+      //vertical
+<span class="fc bfc" id="L58" title="All 2 branches covered.">      if (orientation == 0) {</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        for (int i = 0; i &lt; length; i++) {</span>
+<span class="fc" id="L60">          placement.add(new Coord(initialX, initialY - i));</span>
+        }
+        //horizontal
+      } else {
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        for (int i = 0; i &lt; length; i++) {</span>
+<span class="fc" id="L65">          placement.add(new Coord(initialX + i, initialY));</span>
+        }
+      }
+<span class="fc" id="L68">    }</span>
+
+    //put the ships onto the board
+<span class="fc bfc" id="L71" title="All 2 branches covered.">    for (Coord c : placement) {</span>
+<span class="fc" id="L72">      c.setType(CoordType.SHIP);</span>
+<span class="fc" id="L73">      board[c.getX()][c.getY()] = c;</span>
+<span class="fc" id="L74">    }</span>
+<span class="fc" id="L75">    return placement;</span>
+  }
+
+  /**
+   * Determines whether or not the given list of Coordinates fits on the given board
+   *
+   * @param lc      List of Coordinates to check
+   * @param board   Coord[][] board
+   * @return        Boolean, whether or not the coords are validly placed on the board
+   */
+  private static boolean validPlacement(List&lt;Coord&gt; lc, Coord[][] board) {
+<span class="fc" id="L86">    int maxX = board.length - 1;</span>
+<span class="fc" id="L87">    int maxY = board[maxX].length - 1;</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">    for (Coord c : lc) {</span>
+      //Ship Out of Bounds
+<span class="pc bpc" id="L90" title="1 of 8 branches missed.">      if (c.getX() &lt; 0 || c.getY() &lt; 0 || c.getX() &gt; maxX || c.getY() &gt; maxY) {</span>
+<span class="fc" id="L91">        return false;</span>
+      }
+      //Ship overlaps existing ship
+<span class="fc bfc" id="L94" title="All 2 branches covered.">      if (board[c.getX()][c.getY()].getType().equals(CoordType.SHIP)) {</span>
+<span class="fc" id="L95">        return false;</span>
+      }
+<span class="fc" id="L97">    }</span>
+<span class="fc" id="L98">    return true;</span>
+  }
+
+  /**
+   * Instantiates a Coord[][] board with empty Coord objects;
+   *
+   * @param board   Coord[][] to instantiate
+   */
+  public static void initializeBoard(Coord[][] board) {
+<span class="fc bfc" id="L107" title="All 2 branches covered.">    for (int c = 0; c &lt; board.length; c++) {</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">      for (int r = 0; r &lt; board[c].length; r++) {</span>
+<span class="fc" id="L109">        board[c][r] = new Coord(c, r);</span>
+      }
+    }
+<span class="fc" id="L112">  }</span>
+
+  /**
+   * Generic reportDamage method for both Player Classes.
+   * This method reports damage on this player that called this method,
+   * given shots from the opposing player.
+   * Also, mutates the given board to reflect the fact that this board
+   * has been fired upon.
+   *
+   * @param opponentShotsOnBoard    List of Coord, shots from the opponent
+   * @param myBoard                 Coord[][] the board being shot onto
+   * @param myShips                 List of Ships, ships being shot onto
+   * @return                        List of Coords - successful shots on this board
+   */
+  public static List&lt;Coord&gt; reportDamage(
+      List&lt;Coord&gt; opponentShotsOnBoard, Coord[][] myBoard, List&lt;Ship&gt; myShips) {
+<span class="fc" id="L128">    List&lt;Coord&gt; hits = reportHits(opponentShotsOnBoard, myBoard);</span>
+<span class="fc" id="L129">    List&lt;Coord&gt; misses = reportMisses(opponentShotsOnBoard, myBoard);</span>
+<span class="fc" id="L130">    updateShips(opponentShotsOnBoard, myShips);</span>
+
+    //mutate given board
+<span class="fc bfc" id="L133" title="All 2 branches covered.">    for (Coord c : hits) {</span>
+<span class="fc" id="L134">      myBoard[c.getX()][c.getY()] = new Coord(c.getX(), c.getY(), CoordType.SHIPHIT);</span>
+<span class="fc" id="L135">    }</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">    for (Coord c : misses) {</span>
+<span class="fc" id="L137">      myBoard[c.getX()][c.getY()] = new Coord(c.getX(), c.getY(), CoordType.MISS);</span>
+<span class="fc" id="L138">    }</span>
+<span class="fc" id="L139">    return hits;</span>
+  }
+
+  /**
+   * Returns the successful hits of the opponent onto the given board as a
+   * List of Coords.
+   *
+   * @param opponentShotsOnBoard    List of Coords, shots from the opponent
+   * @param myBoard                 Coord[][] Board being fired upon
+   * @return                        List of Coords - successful shots on this board
+   */
+  private static List&lt;Coord&gt; reportHits(List&lt;Coord&gt; opponentShotsOnBoard, Coord[][] myBoard) {
+<span class="fc" id="L151">    List&lt;Coord&gt; successfulHits = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">    for (Coord c : opponentShotsOnBoard) {</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">      if (myBoard[c.getX()][c.getY()].getType().equals(CoordType.SHIP)</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">          || myBoard[c.getX()][c.getY()].getType().equals(CoordType.SHIPHIT)) {</span>
+<span class="fc" id="L155">        successfulHits.add(c);</span>
+      }
+<span class="fc" id="L157">    }</span>
+<span class="fc" id="L158">    return successfulHits;</span>
+  }
+
+  /**
+   * Returns the misses of the opponent onto the given board as a
+   * List of Coords.
+   *
+   * @param opponentShotsOnBoard    List of Coords, shots from the opponent
+   * @param myBoard                 Coord[][] Board being fired upon
+   * @return                        List of Coords - misses from the opponent
+   */
+  private static List&lt;Coord&gt; reportMisses(List&lt;Coord&gt; opponentShotsOnBoard, Coord[][] myBoard) {
+<span class="fc" id="L170">    List&lt;Coord&gt; unsuccessfulHits = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">    for (Coord c : opponentShotsOnBoard) {</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">      if (!myBoard[c.getX()][c.getY()].getType().equals(CoordType.SHIP)) {</span>
+<span class="fc" id="L173">        unsuccessfulHits.add(c);</span>
+      }
+<span class="fc" id="L175">    }</span>
+<span class="fc" id="L176">    return unsuccessfulHits;</span>
+  }
+
+  /**
+   * Updates the given list of ships so that they reflect being fired upon.
+   *
+   * @param opponentShotsOnBoard  List of Coords, shots from the opponent
+   * @param myShips               List of Ships, the players ships being fired upon
+   */
+  private static void updateShips(List&lt;Coord&gt; opponentShotsOnBoard, List&lt;Ship&gt; myShips) {
+<span class="fc bfc" id="L186" title="All 2 branches covered.">    for (Ship s : myShips) {</span>
+<span class="fc bfc" id="L187" title="All 2 branches covered.">      for (Coord c : opponentShotsOnBoard) {</span>
+<span class="fc bfc" id="L188" title="All 2 branches covered.">        for (Coord sc : s.getShipCoords()) {</span>
+<span class="fc bfc" id="L189" title="All 2 branches covered.">          if (sc.equals(c)) {</span>
+<span class="fc" id="L190">            sc.setType(CoordType.SHIPHIT);</span>
+          }
+<span class="fc" id="L192">        }</span>
+<span class="fc" id="L193">      }</span>
+<span class="fc" id="L194">    }</span>
+<span class="fc" id="L195">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

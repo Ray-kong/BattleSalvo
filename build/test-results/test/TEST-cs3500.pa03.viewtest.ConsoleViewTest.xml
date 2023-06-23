@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="cs3500.pa03.viewtest.ConsoleViewTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2023-06-15T06:11:11" hostname="Rayui-MacBookAir.local" time="0.023">
+  <properties/>
+  <testcase name="promptBoardSize()" classname="cs3500.pa03.viewtest.ConsoleViewTest" time="0.001"/>
+  <testcase name="gameOver()" classname="cs3500.pa03.viewtest.ConsoleViewTest" time="0.001"/>
+  <testcase name="promptCoords()" classname="cs3500.pa03.viewtest.ConsoleViewTest" time="0.001"/>
+  <testcase name="invalidCoords()" classname="cs3500.pa03.viewtest.ConsoleViewTest" time="0.001"/>
+  <testcase name="invalidShips()" classname="cs3500.pa03.viewtest.ConsoleViewTest" time="0.001"/>
+  <testcase name="welcome()" classname="cs3500.pa03.viewtest.ConsoleViewTest" time="0.008"/>
+  <testcase name="displayBoard()" classname="cs3500.pa03.viewtest.ConsoleViewTest" time="0.001"/>
+  <testcase name="displayCoord()" classname="cs3500.pa03.viewtest.ConsoleViewTest" time="0.001"/>
+  <testcase name="promptShips()" classname="cs3500.pa03.viewtest.ConsoleViewTest" time="0.0"/>
+  <testcase name="invalidBoardSize()" classname="cs3500.pa03.viewtest.ConsoleViewTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

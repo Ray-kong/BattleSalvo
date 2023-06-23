@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserPlayer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pa04</a> &gt; <a href="index.source.html" class="el_package">cs3500.pa03.model</a> &gt; <span class="el_source">UserPlayer.java</span></div><h1>UserPlayer.java</h1><pre class="source lang-java linenums">package cs3500.pa03.model;
+
+import cs3500.pa03.controller.SalvoController;
+import cs3500.pa03.model.enumerations.CoordType;
+import cs3500.pa03.model.enumerations.GameResult;
+import cs3500.pa03.model.enumerations.ShipType;
+import cs3500.pa03.view.ConsoleView;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * UserPlayer class implementing the Player interface.
+ * Represents a user playing the game from the console.
+ */
+public class UserPlayer implements Player {
+  private String name;
+  private Coord[][] myBoard;
+  private Coord[][] enemyBoard;
+
+  private List&lt;Ship&gt; myShips;
+
+  List&lt;Coord&gt; previousShots;
+
+  /**
+   * UserPlayer constructor
+   */
+<span class="fc" id="L28">  public UserPlayer() {</span>
+<span class="fc" id="L29">    previousShots = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L30">  }</span>
+
+  /**
+   * Get the player's name.
+   *
+   * @return the player's name
+   */
+  @Override
+  public String name() {
+<span class="fc" id="L39">    return null;</span>
+  }
+
+  /**
+   * Given the specifications for a BattleSalvo board, return a list of ships with their locations
+   * on the board.
+   *
+   * @param height         the height of the board, range: [6, 15] inclusive
+   * @param width          the width of the board, range: [6, 15] inclusive
+   * @param specifications a map of ship type to the number of occurrences each ship should
+   *                       appear on the board
+   * @return the placements of each ship on the board
+   */
+  @Override
+  public List&lt;Ship&gt; setup(int height, int width, Map&lt;ShipType, Integer&gt; specifications) {
+<span class="fc" id="L54">    myBoard = new Coord[width][height];</span>
+<span class="fc" id="L55">    enemyBoard = new Coord[myBoard.length][myBoard[0].length];</span>
+<span class="fc" id="L56">    PlayerUtils.initializeBoard(enemyBoard);</span>
+<span class="fc" id="L57">    List&lt;Ship&gt; ships = PlayerUtils.setup(specifications, myBoard);</span>
+<span class="fc" id="L58">    myShips = ships;</span>
+<span class="fc" id="L59">    return ships;</span>
+  }
+
+  /**
+   * Returns this player's shots on the opponent's board. The number of shots returned should
+   * equal the number of ships on this player's board that have not sunk.
+   *
+   * @return the locations of shots on the opponent's board
+   */
+  @Override
+  public List&lt;Coord&gt; takeShots() {
+<span class="fc" id="L70">    int totalShots = 0;</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">    for (Ship s : myShips) {</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">      if (!s.isSunk()) {</span>
+<span class="fc" id="L73">        totalShots++;</span>
+      }
+<span class="fc" id="L75">    }</span>
+<span class="fc" id="L76">    List&lt;Coord&gt; shots = SalvoController.getUserAttack(totalShots,</span>
+        myBoard.length, myBoard[0].length);
+<span class="fc" id="L78">    previousShots.addAll(shots);</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">    for (Coord c : shots) {</span>
+<span class="fc" id="L80">      enemyBoard[c.getX()][c.getY()] = new Coord(c.getX(), c.getY(), CoordType.MISS);</span>
+<span class="fc" id="L81">    }</span>
+<span class="fc" id="L82">    return shots;</span>
+  }
+
+  /**
+   * Given the list of shots the opponent has fired on this player's board, report which
+   * shots hit a ship on this player's board.
+   *
+   * @param opponentShotsOnBoard the opponent's shots on this player's board
+   * @return a filtered list of the given shots that contain all locations of shots that hit
+   */
+  @Override
+  public List&lt;Coord&gt; reportDamage(List&lt;Coord&gt; opponentShotsOnBoard) {
+<span class="fc" id="L94">    return PlayerUtils.reportDamage(opponentShotsOnBoard, myBoard, myShips);</span>
+  }
+
+  /**
+   * Reports to this player what shots in their previous volley returned from takeShots()
+   * successfully hit an opponent's ship.
+   *
+   * @param shotsThatHitOpponentShips the list of shots that successfully hit the opponent's ships
+   */
+  @Override
+  public void successfulHits(List&lt;Coord&gt; shotsThatHitOpponentShips) {
+<span class="fc bfc" id="L105" title="All 2 branches covered.">    for (Coord c : shotsThatHitOpponentShips) {</span>
+<span class="fc" id="L106">      enemyBoard[c.getX()][c.getY()] = new Coord(c.getX(), c.getY(), CoordType.HIT);</span>
+<span class="fc" id="L107">    }</span>
+<span class="fc" id="L108">  }</span>
+
+  /**
+   * Notifies the player that the game is over.
+   * Win, lose, and draw should all be supported
+   *
+   * @param result if the player has won, lost, or forced a draw
+   * @param reason the reason for the game ending
+   */
+  @Override
+  public void endGame(GameResult result, String reason) {
+    //Adding a view to the player, so they know the game is over.
+    //They said this was okay for PA03.
+<span class="fc" id="L121">    ConsoleView view = new ConsoleView();</span>
+<span class="fc" id="L122">    view.gameOver(result, reason);</span>
+<span class="fc" id="L123">  }</span>
+
+  public Coord[][] getMyBoard() {
+<span class="fc" id="L126">    return this.myBoard;</span>
+  }
+
+  public Coord[][] getEnemyBoard() {
+<span class="fc" id="L130">    return this.enemyBoard;</span>
+  }
+
+  public List&lt;Ship&gt; getMyShips() {
+<span class="fc" id="L134">    return this.myShips;</span>
+  }
+
+  public void setMyShips(List&lt;Ship&gt; list) {
+<span class="fc" id="L138">    this.myShips = list;</span>
+<span class="fc" id="L139">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

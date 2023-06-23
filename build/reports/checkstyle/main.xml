@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.10.0">
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa04/Driver.java">
+<error line="38" column="5" severity="warning" message="&apos;if&apos; is not followed by whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAfterCheck"/>
+<error line="38" column="5" severity="warning" message="WhitespaceAround: &apos;if&apos; is not followed by whitespace. Empty blocks                may only be represented as {} when not part of a multi-block statement (4.1.3)" source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+<error line="41" column="5" severity="warning" message="&apos;}&apos; at column 5 should be on the same line as the next part of a multi-block statement (one that directly contains multiple blocks: if/else-if/else, do/while or try/catch/finally)." source="RightCurlySame"/>
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa04/adapter/CoordAdapter.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa04/adapter/ShipAdapter.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa04/controller/ProxyController.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa04/json/response/JoinResponse.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa04/json/response/MessageJson.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa04/json/request/SetupRequestJson.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa04/json/request/EndGameRequestJson.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa04/json/data/ShipJson.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa04/json/data/EmptyJson.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa04/json/data/CoordListJson.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa04/json/data/FleetJson.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa04/json/data/FleetSpecJson.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa04/json/data/CoordJson.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa04/json/JsonUtils.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/Driver03.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/controller/GameController.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/controller/SalvoController.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/controller/EndGameController.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/singleton/Randomizer.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/singleton/InputScanner.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/model/UserPlayer.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/model/enumerations/Orientation.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/model/enumerations/GameResult.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/model/enumerations/ShipType.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/model/enumerations/CoordType.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/model/ComputerPlayer.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/model/Ship.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/model/Coord.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/model/Player.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/model/GameState.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/model/ShootingStrategy.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/model/PlayerUtils.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/model/HitGrouping.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/view/ViewInterface.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/main/java/cs3500/pa03/view/ConsoleView.java">
+</file>
+</checkstyle>

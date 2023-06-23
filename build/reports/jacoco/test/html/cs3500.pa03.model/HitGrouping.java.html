@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HitGrouping.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pa04</a> &gt; <a href="index.source.html" class="el_package">cs3500.pa03.model</a> &gt; <span class="el_source">HitGrouping.java</span></div><h1>HitGrouping.java</h1><pre class="source lang-java linenums">package cs3500.pa03.model;
+
+import cs3500.pa03.model.enumerations.CoordType;
+import cs3500.pa03.model.enumerations.Orientation;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Represents a grouping of hits in a game board.
+ */
+<span class="nc" id="L11">public record HitGrouping(int length, Orientation orientation, List&lt;Coord&gt; coords) {</span>
+
+  /**
+   * Constructs a new HitGrouping.
+   *
+   * @param length      The length of the hit grouping.
+   * @param orientation The orientation of the hit grouping.
+   * @param coords      The coordinates of the hit grouping.
+   */
+<span class="fc" id="L20">  public HitGrouping(int length, Orientation orientation, List&lt;Coord&gt; coords) {</span>
+<span class="fc" id="L21">    this.length = length;</span>
+<span class="fc" id="L22">    this.orientation = orientation;</span>
+<span class="fc" id="L23">    this.coords = new ArrayList&lt;&gt;(coords);  // Creating new list for immutability</span>
+<span class="fc" id="L24">  }</span>
+
+  /**
+   * Returns a new list of the coordinates, preserving immutability.
+   *
+   * @return a new list containing the coordinates of the hit grouping.
+   */
+  @Override
+  public List&lt;Coord&gt; coords() {
+<span class="fc" id="L33">    return new ArrayList&lt;&gt;(this.coords);  // Returning new list for immutability</span>
+  }
+
+  /**
+   * Returns a list of coordinates for unchecked sides of the hit grouping.
+   *
+   * @param enemyBoard The enemy's game board.
+   * @return a list of coordinates for unchecked sides.
+   */
+  public List&lt;Coord&gt; getUncheckedSides(Coord[][] enemyBoard) {
+<span class="fc" id="L43">    List&lt;Coord&gt; uncheckedSides = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L44">    Coord topLeft = coords.get(0);</span>
+<span class="fc" id="L45">    Coord bottomRight = coords.get(0);</span>
+
+<span class="fc bfc" id="L47" title="All 2 branches covered.">    for (Coord c : coords) {</span>
+<span class="pc bpc" id="L48" title="2 of 4 branches missed.">      if (topLeft.getX() &gt; c.getX() || topLeft.getY() &gt; c.getY()) {</span>
+<span class="nc" id="L49">        topLeft = c;</span>
+      }
+<span class="fc bfc" id="L51" title="All 4 branches covered.">      if (bottomRight.getX() &lt; c.getX() || bottomRight.getY() &lt; c.getY()) {</span>
+<span class="fc" id="L52">        bottomRight = c;</span>
+      }
+<span class="fc" id="L54">    }</span>
+
+<span class="fc bfc" id="L56" title="All 2 branches covered.">    if (this.orientation.equals(Orientation.VERTICAL)) {</span>
+<span class="fc" id="L57">      addIfEmptyAndWithinBounds(uncheckedSides, enemyBoard, topLeft.getX(), topLeft.getY() - 1);</span>
+<span class="fc" id="L58">      addIfEmptyAndWithinBounds(uncheckedSides, enemyBoard, bottomRight.getX(),</span>
+<span class="fc" id="L59">          bottomRight.getY() + 1);</span>
+    } else {
+<span class="fc" id="L61">      addIfEmptyAndWithinBounds(uncheckedSides, enemyBoard, topLeft.getX() - 1, topLeft.getY());</span>
+<span class="fc" id="L62">      addIfEmptyAndWithinBounds(uncheckedSides, enemyBoard, bottomRight.getX() + 1,</span>
+<span class="fc" id="L63">          bottomRight.getY());</span>
+    }
+<span class="fc" id="L65">    return uncheckedSides;</span>
+  }
+
+  /**
+   * Adds a coordinate to the unchecked sides if the coordinate is within the game board bounds and
+   * its type is empty.
+   *
+   * @param uncheckedSides The list of unchecked sides to add the coordinate to.
+   * @param enemyBoard     The enemy's game board.
+   * @param x              The x coordinate.
+   * @param y              The y coordinate.
+   */
+  private void addIfEmptyAndWithinBounds(List&lt;Coord&gt; uncheckedSides, Coord[][] enemyBoard, int x,
+                                         int y) {
+<span class="pc bpc" id="L79" title="2 of 8 branches missed.">    if (x &gt;= 0 &amp;&amp; y &gt;= 0 &amp;&amp; x &lt; enemyBoard.length &amp;&amp; y &lt; enemyBoard[0].length</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        &amp;&amp; enemyBoard[x][y].getType().equals(CoordType.EMPTY)) {</span>
+<span class="fc" id="L81">      uncheckedSides.add(new Coord(x, y));</span>
+    }
+<span class="fc" id="L83">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="cs3500.pa03.modeltest.CoordTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-06-15T06:11:11" hostname="Rayui-MacBookAir.local" time="0.018">
+  <properties/>
+  <testcase name="getType()" classname="cs3500.pa03.modeltest.CoordTest" time="0.001"/>
+  <testcase name="getX()" classname="cs3500.pa03.modeltest.CoordTest" time="0.0"/>
+  <testcase name="getY()" classname="cs3500.pa03.modeltest.CoordTest" time="0.0"/>
+  <testcase name="testEquals()" classname="cs3500.pa03.modeltest.CoordTest" time="0.002"/>
+  <testcase name="setType()" classname="cs3500.pa03.modeltest.CoordTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

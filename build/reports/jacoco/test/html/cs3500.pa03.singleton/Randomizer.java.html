@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Randomizer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pa04</a> &gt; <a href="index.source.html" class="el_package">cs3500.pa03.singleton</a> &gt; <span class="el_source">Randomizer.java</span></div><h1>Randomizer.java</h1><pre class="source lang-java linenums">package cs3500.pa03.singleton;
+
+import java.util.Random;
+
+/**
+ * Singleton Randomizer for generating
+ * random numbers.
+ */
+public class Randomizer {
+<span class="fc" id="L10">  private static Randomizer instance = null;</span>
+
+  //in tester rand, Random gets a set seed.
+  private Random random;
+
+  /**
+   * Private constructor for this Randomizer
+   */
+<span class="fc" id="L18">  private Randomizer() {</span>
+<span class="fc" id="L19">    random = new Random();</span>
+<span class="fc" id="L20">  }</span>
+
+  /**
+   * Gets the Randomizer Singleton
+   *
+   * @return  Randomizer Singleton object
+   */
+  public static Randomizer getRandomizer() {
+<span class="fc bfc" id="L28" title="All 2 branches covered.">    if (instance == null) {</span>
+<span class="fc" id="L29">      instance = new Randomizer();</span>
+    }
+<span class="fc" id="L31">    return instance;</span>
+  }
+
+  /**
+   * Updates the seed of this Randomizer object
+   * for testing purposes.
+   *
+   * @param seed int seed for the random object
+   */
+  public void updateSeed(int seed) {
+<span class="fc" id="L41">    random = new Random(seed);</span>
+<span class="fc" id="L42">  }</span>
+
+  /**
+   *  Resets the random back to one without a seed
+   */
+  public void updateSeed() {
+<span class="fc" id="L48">    random = new Random();</span>
+<span class="fc" id="L49">  }</span>
+
+  /**
+   * Gets the Random object of this Randomizer
+   *
+   * @return    Random object
+   */
+  public Random getRandom() {
+<span class="fc" id="L57">    return this.random;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

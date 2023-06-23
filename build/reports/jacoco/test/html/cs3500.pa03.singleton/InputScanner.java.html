@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InputScanner.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pa04</a> &gt; <a href="index.source.html" class="el_package">cs3500.pa03.singleton</a> &gt; <span class="el_source">InputScanner.java</span></div><h1>InputScanner.java</h1><pre class="source lang-java linenums">package cs3500.pa03.singleton;
+
+import java.io.InputStream;
+import java.util.Scanner;
+
+/**
+ * Singleton Scanner for this program.
+ * There should only be one scanner open for the
+ * run duration of this program.
+ */
+public class InputScanner {
+<span class="fc" id="L12">  private static InputScanner instance = null;</span>
+
+  private Scanner scanner;
+
+  /**
+   * Private constructor for this singleton
+   */
+<span class="fc" id="L19">  private InputScanner() {</span>
+<span class="fc" id="L20">    scanner = new Scanner(System.in);</span>
+<span class="fc" id="L21">  }</span>
+
+  /**
+   * Gets the instance of this InputScanner
+   *
+   * @return    the InputScanner singleton
+   */
+  public static InputScanner getInputScanner() {
+<span class="fc bfc" id="L29" title="All 2 branches covered.">    if (instance == null) {</span>
+<span class="fc" id="L30">      instance = new InputScanner();</span>
+    }
+<span class="fc" id="L32">    return instance;</span>
+  }
+
+  /**
+   * Changes the input stream for this program
+   *
+   * @param in    input stream to switch this InputScanner to
+   */
+  public void changeInputStream(InputStream in) {
+<span class="fc" id="L41">    this.scanner = new Scanner(in);</span>
+<span class="fc" id="L42">  }</span>
+
+  /**
+   * Gets the Scanner of this InputScanner
+   *
+   * @return    Scanner for scanning
+   */
+  public Scanner getScanner() {
+<span class="fc" id="L50">    return this.scanner;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

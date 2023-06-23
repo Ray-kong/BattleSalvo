@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.10.0">
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/test/java/cs3500/pa04/DriverTest.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/test/java/cs3500/pa04/controllertest/ProxyControllerTest.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/test/java/cs3500/pa04/controllertest/Mocked.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/test/java/cs3500/pa03/modeltest/CoordTest.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/test/java/cs3500/pa03/modeltest/UserPlayerTest.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/test/java/cs3500/pa03/modeltest/ComputerPlayerTest.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/test/java/cs3500/pa03/modeltest/PlayerUtilsTest.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/test/java/cs3500/pa03/modeltest/GameStateTest.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/test/java/cs3500/pa03/modeltest/ShipTest.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/test/java/cs3500/pa03/DriverTest.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/test/java/cs3500/pa03/controllertest/EndGameControllerTest.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/test/java/cs3500/pa03/controllertest/GameControllerTest.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/test/java/cs3500/pa03/controllertest/SalvoControllerTest.java">
+</file>
+<file name="/Users/raykong/Documents/CS3500/pa04-almostthreegoodatcoding/src/test/java/cs3500/pa03/viewtest/ConsoleViewTest.java">
+</file>
+</checkstyle>

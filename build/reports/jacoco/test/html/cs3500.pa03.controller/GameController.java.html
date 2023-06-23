@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pa04</a> &gt; <a href="index.source.html" class="el_package">cs3500.pa03.controller</a> &gt; <span class="el_source">GameController.java</span></div><h1>GameController.java</h1><pre class="source lang-java linenums">package cs3500.pa03.controller;
+
+import cs3500.pa03.model.ComputerPlayer;
+import cs3500.pa03.model.GameState;
+import cs3500.pa03.model.UserPlayer;
+import cs3500.pa03.model.enumerations.ShipType;
+import cs3500.pa03.singleton.InputScanner;
+import cs3500.pa03.view.ConsoleView;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+/**
+ * The responsibility of this controller is to
+ * manage what happens at the start of the game.
+ */
+<span class="fc" id="L19">public class GameController {</span>
+
+  /**
+   * Method calls to initialize the game.
+   */
+  public void initializeGame() {
+<span class="fc" id="L25">    GameState state = new GameState();</span>
+<span class="fc" id="L26">    initializeUser(state.getP1(), state);</span>
+<span class="fc" id="L27">    initializeComputer(state.getP2(), state);</span>
+<span class="fc" id="L28">    SalvoController.launchSalvo(state);</span>
+<span class="fc" id="L29">  }</span>
+
+  /**
+   * Initializing a console player.
+   *
+   * @param p     UserPlayer to init
+   * @param state Game state to init
+   */
+  private void initializeUser(UserPlayer p, GameState state) {
+<span class="fc" id="L38">    ConsoleView view = new ConsoleView();</span>
+<span class="fc" id="L39">    view.welcome();</span>
+<span class="fc" id="L40">    Scanner s = InputScanner.getInputScanner().getScanner();</span>
+<span class="fc" id="L41">    view.promptBoardSize();</span>
+<span class="fc" id="L42">    int width = s.nextInt();</span>
+<span class="fc" id="L43">    int height = s.nextInt();</span>
+<span class="pc bpc" id="L44" title="1 of 4 branches missed.">    while (!(validBoardRange(width) &amp;&amp; validBoardRange(height))) {</span>
+<span class="fc" id="L45">      view.invalidBoardSize(6, 15);</span>
+<span class="fc" id="L46">      width = s.nextInt();</span>
+<span class="fc" id="L47">      height = s.nextInt();</span>
+    }
+    //-----------------------//
+<span class="fc" id="L50">    Map&lt;ShipType, Integer&gt; specs = askSpecifications(height, width);</span>
+<span class="fc" id="L51">    state.setHeight(height);</span>
+<span class="fc" id="L52">    state.setWidth(width);</span>
+<span class="fc" id="L53">    state.setSpecifications(specs);</span>
+<span class="fc" id="L54">    p.setup(height, width, specs);</span>
+<span class="fc" id="L55">  }</span>
+
+  /**
+   * Prompts the user for fleet specifications.
+   *
+   * @param height height of the board
+   * @param width  width of the board
+   * @return       HashMap representing the number of ships per type
+   */
+  private Map&lt;ShipType, Integer&gt; askSpecifications(int height, int width) {
+<span class="fc" id="L65">    ConsoleView view = new ConsoleView();</span>
+<span class="fc" id="L66">    Scanner s = InputScanner.getInputScanner().getScanner();</span>
+<span class="fc" id="L67">    view.promptShips(Math.min(width, height));</span>
+<span class="fc" id="L68">    Map&lt;ShipType, Integer&gt; specs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L69">    List&lt;ShipType&gt; types = ShipType.asList();</span>
+<span class="fc" id="L70">    int total = 0;</span>
+<span class="fc" id="L71">    List&lt;Integer&gt; entries = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">    for (ShipType t : types) {</span>
+<span class="fc" id="L73">      int temp = s.nextInt();</span>
+<span class="fc" id="L74">      entries.add(temp);</span>
+<span class="fc" id="L75">      total += temp;</span>
+<span class="fc" id="L76">    }</span>
+<span class="pc bpc" id="L77" title="1 of 6 branches missed.">    while (total &lt;= 0 || total &gt; Math.min(width, height) || entries.contains(0)) {</span>
+<span class="fc" id="L78">      specs = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L79">      entries = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L80">      total = 0;</span>
+<span class="fc" id="L81">      view.invalidShips(Math.min(width, height));</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">      for (ShipType t : types) {</span>
+<span class="fc" id="L83">        int temp = s.nextInt();</span>
+<span class="fc" id="L84">        entries.add(temp);</span>
+<span class="fc" id="L85">        total += temp;</span>
+<span class="fc" id="L86">      }</span>
+    }
+<span class="fc bfc" id="L88" title="All 2 branches covered.">    for (int i = 0; i &lt; types.size(); i++) {</span>
+<span class="fc" id="L89">      specs.put(types.get(i), entries.get(i));</span>
+    }
+<span class="fc" id="L91">    return specs;</span>
+  }
+
+  /**
+   * Is the given number within this set range? 6 - 15 inclusive
+   *
+   * @param n given number to test
+   * @return  boolean
+   */
+  private boolean validBoardRange(int n) {
+<span class="fc bfc" id="L101" title="All 4 branches covered.">    return n &gt;= 6 &amp;&amp; n &lt;= 15;</span>
+  }
+
+  /**
+   * Initializes the computer player with its setup method.
+   *
+   * @param p     ComputerPlayer to initialize
+   * @param state GameState to initialize
+   */
+  private void initializeComputer(ComputerPlayer p, GameState state) {
+<span class="fc" id="L111">    p.setup(state.getHeight(), state.getWidth(), state.getSpecifications());</span>
+<span class="fc" id="L112">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
