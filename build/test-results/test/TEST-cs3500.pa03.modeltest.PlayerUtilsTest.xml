@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="cs3500.pa03.modeltest.PlayerUtilsTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-06-15T06:11:11" hostname="Rayui-MacBookAir.local" time="0.003">
-  <properties/>
-  <testcase name="setup()" classname="cs3500.pa03.modeltest.PlayerUtilsTest" time="0.001"/>
-  <testcase name="reportDamage()" classname="cs3500.pa03.modeltest.PlayerUtilsTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
